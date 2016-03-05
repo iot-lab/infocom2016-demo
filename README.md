@@ -78,7 +78,7 @@ Routes<pre>
 2001:660:5307:3100::9176/128 (via fe80::9176) 16711393s
 2001:660:5307:3100::b868/128 (via fe80::b868) 16711393s
 ```
-You can see in the section Routes all CoAP servers ipv6 address (<ipv6_subnet>::<m3_uid>) of your 6LoWPAN network.
+You can see in the section Routes all CoAP servers ipv6 address ( &lt;ipv6_subnet&gt;::&lt;m3_node_uid&gt;) of your 6LoWPAN network.
 
     
 ### Launch nodejs server
@@ -125,7 +125,7 @@ You can add a new datasource :
 * Type : Node.js (Socket.io)
 * Name : Choose a name 
 * Server URL : http://localhost:8080 (Node.js server address)
-* NameSpace : m3 node uid (Coap server ipv6 address = &lt;ipv6_subnet&gt;::uid)
+* NameSpace : m3 node uid
 * Event : light|serial
 
 Add a widget to visualize the datasource values ....
