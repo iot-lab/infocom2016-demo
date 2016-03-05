@@ -47,7 +47,7 @@ INFOCOM2016 ipv6 demonstration description ...
     ```
 
 ### Launch IoT-LAB experiment
-This script book some M3 nodes on the IoT-LAB testbed and deploy automatically an IPv6 6LoWPAN network.
+We book some M3 nodes on the IoT-LAB testbed and deploy automatically an IPv6 6LoWPAN network.
 
 1. choose randomly in the experiment nodes list a border router node
 2. run on the frontend SSH a background tunslip6 process with border router node serial port in charge of connection to other IPv6 networks (eg: Cloud infrastructure)
@@ -62,30 +62,32 @@ testbed ipv6 subnetting you can read [this tutorial](https://www.iot-lab.info/tu
 $ ./exp_iotlab.py --duration 60 --nodes 10,archi=m3:at86rf231+site=grenoble
 # Book 10 M3 nodes (m3-1 -> m3-10) on the Grenoble site for 1 hour 
 $ ./exp_iotlab.py --duration 60 --nodes grenoble,m3,1-10
-# Book 10 M3 nodes on the Grenoble site for 1 hour and specify a new IPv6 subnet
+# Book 10 M3 nodes on the Grenoble site for 1 hour and specify an IPv6 subnet
 $ ./exp_iotlab.py --duration 60 --nodes 10,archi=m3:at86rf231+site=grenoble --ipv6prefix 2001:660:5307:3103
 ```
     
 At the end of the script get the border router public ipv6 address and test the connectivity. You also can visualize
-the 6LoWPAN network topology with a request on the border router http server.
+the 6LoWPAN network topology (CoAP servers public IPv6 address) with a http request on the border router.
 
 ```
 $ ping6 <br_ipv6_address>
 $ curl -g "http://[<br_ipv6_address>]"
+
 ```
     
 ### Launch nodejs server
 
-The node.js server get all M3 nodes (CoAP servers) IPv6 address and launch CoAP clients to "observe" CoAP server resources. These CoAP clients send Websockets events (Socket.io) when they receive update values. 
+The node.js server get all CoAP servers IPv6 address and launch CoAP clients to "observe" CoAP server resources. These CoAP clients send Websockets events (Socket.io) when they receive update values. 
 ```
 $ node node_server.js <br_ipv6_address>
 ```
 
-It separate CoAP clients communication channel with Websockets namespaces :
+It separates CoAP clients communication channel with Websockets namespaces :
 ```
+# namespace = m3 node uid = end of the CoAP server ipv6 address (<ipv6_subnet>::uid)
+# eventname = CoAP resource like light or serial
 io.of(/<namespace>).emit(<eventname>, value)
 ```
-We match namespace with M3 node uid and eventname with CoAP resource (eg. light or serial) 
 
 ### Configure IoT dashboard (Freeboard.io)
 
