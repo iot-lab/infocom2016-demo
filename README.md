@@ -128,9 +128,9 @@ You can add a new datasource :
 * NameSpace : m3 node uid
 * Event : light|serial
 
-Add a widget to visualize the datasource values ....
+Add a widget to visualize the datasource values.
 
-TODO complete
+TODO complete with widget screenshot
 
 
 
