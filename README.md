@@ -66,7 +66,7 @@ $ ./exp_iotlab.py --duration 60 --nodes grenoble,m3,1-10
 $ ./exp_iotlab.py --duration 60 --nodes 10,archi=m3:at86rf231+site=grenoble --ipv6prefix 2001:660:5307:3103
 ```
     
-At the end of the script get the border router public ipv6 address and test the connectivity. You also can visualize
+The script returns the border router public ipv6 address and you can test the connectivity. You also can visualize
 the 6LoWPAN network topology (CoAP servers public IPv6 address) with a http request on the border router.
 
 ```
@@ -90,7 +90,7 @@ $ node node_server.js <br_ipv6_address>
 
 It separates CoAP clients communication channel with Websockets namespaces :
 ```
-# namespace = m3 node uid = end of the CoAP server ipv6 address (<ipv6_subnet>::uid)
+# namespace = m3 node uid = end of the CoAP server ipv6 address
 # eventname = CoAP resource like light or serial
 io.of(/<namespace>).emit(<eventname>, value)
 ```
