@@ -52,7 +52,7 @@ We book some M3 nodes on the IoT-LAB testbed and deploy automatically an IPv6 6L
 1. choose randomly in the experiment nodes list a border router node
 2. run on the frontend SSH a background tunslip6 process with border router node serial port in charge of connection to other IPv6 networks (eg: Cloud infrastructure)
 3. flash ContikiOS border router firmware on the border router 
-4. flash CoAP server firmware on the other nodes
+4. flash ContikiOS CoAP server firmware on the other nodes
 
 It uses by default an IoT-LAB public ipv6 subnet (eg. 2001:660:5307:3100/64). If you want to understand the IoT-LAB 
 testbed ipv6 subnetting you can read [this tutorial](https://www.iot-lab.info/tutorials/understand-ipv6-subnetting-on-the-fit-iot-lab-testbed/).
@@ -72,8 +72,14 @@ the 6LoWPAN network topology (CoAP servers public IPv6 address) with a http requ
 ```
 $ ping6 <br_ipv6_address>
 $ curl -g "http://[<br_ipv6_address>]"
-
+<html><head><title>ContikiRPL</title></head><body>
+...
+Routes<pre>
+2001:660:5307:3100::9176/128 (via fe80::9176) 16711393s
+2001:660:5307:3100::b868/128 (via fe80::b868) 16711393s
 ```
+You can see in the section Routes all CoAP servers ipv6 address (<ipv6_subnet>::<m3_uid>) of your 6LoWPAN network.
+
     
 ### Launch nodejs server
 
