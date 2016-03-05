@@ -16,6 +16,13 @@ INFOCOM2016 ipv6 demonstration description ...
     $ npm install socket.io coap
     ```
 
+* Install lighttpd and [freeboard.io](https://freeboard.io/) dashboard
+   ```
+   $ apt-get install lighttpd
+   $ cd /var/www
+   $ git clone https://github.com/Freeboard/freeboard.git
+   ```
+
 * Configure IoT-LAB authentication
    ```  
    $ auth-cli -u <iotlab_login>
@@ -69,21 +76,47 @@ $ curl -g "http://[<br_ipv6_address>]"
     
 ### Launch nodejs server
 
-The node.js server get all CoAP servers IPv6 address and launch CoAP clients to "observe" CoAP server resources. These CoAP clients send websocket events (socket.io) when they receive update values. 
+The node.js server get all M3 nodes (CoAP servers) IPv6 address and launch CoAP clients to "observe" CoAP server resources. These CoAP clients send Websockets events (Socket.io) when they receive update values. 
+```
+$ node node_server.js <br_ipv6_address>
+```
 
+It separate CoAP clients communication channel with Websockets namespaces :
 ```
-$ node server.js <br_ipv6_address>
+io.of(/<namespace>).emit(<eventname>, value)
 ```
+We match namespace with M3 node uid and eventname with CoAP resource (eg. light or serial) 
 
 ### Configure IoT dashboard (Freeboard.io)
 
-Open freeboard dashboard in your browser (eg. freeboard/index.html)
+Copy datasource plugin to connect freeboard.io dashboard to real-time node.js server. It subscribe to real-time event using
+WebSockets (Sockets.io)
+
+```
+$ cp freeboard/plugin_node.js /var/www/freeboard/plugins/thirdparty/
+```
+
+Edit your freeboard.io main HTML file and add the plugin to the header
+
+```
+$ vi /var/www/freeboard/index.html
+<script type="text/javascript">
+    head.js(
+            ...
+            "js/freeboard/plugins/plugin_node.js",
+```
+
+Open dashboard in your browser
+
+```
+http://<your_cloud_instance>/freeboard
+```
 
 You can add a new datasource :
 
 * Type : Node.js (Socket.io)
 * Name : Choose a name 
-* Server URL : http://localhost:8080
+* Server URL : http://localhost:8080 (Node.js server address)
 * NameSpace : m3 node uid (Coap server ipv6 address = &lt;ipv6_subnet&gt;::uid)
 * Event : light|serial
 
