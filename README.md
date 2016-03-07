@@ -5,6 +5,9 @@ INFOCOM2016 ipv6 demonstration description ...
 ### Requirement
 
 * Install IoT-LAB tools :
+
+We use [Fabric](http://www.fabfile.org/) python library for SSH application deployment
+
     ```
     $ apt-get install python-pip git python-dev python-ecdsa fabric
     $ pip install -e git+https://github.com/iot-lab/cli-tools.git#egg=iotlabcli[secure]
