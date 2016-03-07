@@ -1,5 +1,13 @@
 #!/usr/bin/env python
 # -*- coding:utf-8
+"""This script submits an experiment with M3 nodes on
+the FIT IoT-LAB testbed and deploys automatically a
+6LoWPAN network .It chooses randomly a border router node
+and runs on the frontend SSH a background tunslip6 process
+ with its serial port. It also flashes a ContikiOS border
+router firmware on it. Finally it flashes ContikiOS CoAP
+ server firmware on the other nodes.
+"""
 
 import fabric.operations
 import fabric.tasks
@@ -34,7 +42,8 @@ FW_DICT = {
 
 
 def _launch_tunslip6_interface(ipv6prefix, node):
-    """ Launch tunslip6 interface on BR (screen background mode) """
+    """ Launch tunslip6 interface on SSH frontend site
+    with border router serial port (screen background mode) """
     cmd = 'screen -dm sudo tunslip6.py %s::1/64 -L -a %s -p 20000; sleep 1'
     fabric.operations.run(cmd % (ipv6prefix, node))
 
@@ -74,7 +83,7 @@ def _get_exp_nodes(api, exp_id):
 
 
 def _get_exp_results(api, exp_id):
-    """ Return a list of resources with deployment success """
+    """ Return a list of nodes with deployment success """
     return experiment.get_experiment(api, exp_id)['deploymentresults']['0']
 
 
@@ -88,8 +97,10 @@ def main():
     """ Start experiment"""
     opts = PARSER.parse_args()
     user, passwd = get_user_credentials(opts.username, opts.password)
-    # Fabric ssh configuration
+    # Fabric configuration with env environment
+    # use ~/.ssh/config file
     env.use_ssh_config = True
+    # use IoT-LAB login for ssh connexion
     env.user = user
     api = iotlabcli.Api(user, passwd)
     exp_id = _submit_exp(api,
@@ -101,14 +112,14 @@ def main():
     exp_results = _get_exp_results(api, exp_id)
     # We choose a border router (BR)
     br_node = exp_results.pop(0)
+    # br_node = m3-<id>.site.iot-lab.info
     br_node_site = br_node.split('.')[1]
     fabric.tasks.execute(_launch_tunslip6_interface, opts.ipv6prefix,
                          br_node, hosts=[br_node_site])
-    # flash BR firmware
+    # flash BR firmware on the border router
     _update_firm_nodes(api, exp_id, [br_node], FW_DICT['border_router'])
-    # flash Coap nodes
+    # flash Coap server firmware on the other nodes
     _update_firm_nodes(api, exp_id, exp_results, FW_DICT['coap_server'])
-    #_teardown_exp(api, exp_id)
     print 'Border router :'
     print '%s - %s::%s' % (br_node,
                            opts.ipv6prefix,
