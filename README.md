@@ -78,7 +78,7 @@ Routes<pre>
 2001:660:5307:3100::9176/128 (via fe80::9176) 16711393s
 2001:660:5307:3100::b868/128 (via fe80::b868) 16711393s
 ```
-You can see in the section Routes all CoAP servers ipv6 address ( &lt;ipv6_subnet&gt;::&lt;m3_node_uid&gt;) of your 6LoWPAN network.
+You can see in the section Routes the CoAP servers ipv6 address list ( &lt;ipv6_subnet&gt;::&lt;m3_node_uid&gt;) of your 6LoWPAN network.
 
     
 ### Launch nodejs server
