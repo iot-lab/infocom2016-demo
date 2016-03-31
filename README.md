@@ -114,7 +114,7 @@ $ vi /var/www/freeboard/index.html
 <script type="text/javascript">
     head.js(
             ...
-            "js/freeboard/plugins/plugin_node.js",
+            "js/freeboard/plugins/thirdparty/plugin_node.js",
 ```
 
 Open dashboard in your browser
