@@ -5,6 +5,9 @@ INFOCOM2016 ipv6 demonstration description ...
 ### Requirement
 
 * Install IoT-LAB tools :
+
+We use [Fabric](http://www.fabfile.org/) python library for SSH application deployment
+
     ```
     $ apt-get install python-pip git python-dev python-ecdsa fabric
     $ pip install -e git+https://github.com/iot-lab/cli-tools.git#egg=iotlabcli[secure]
@@ -59,11 +62,11 @@ testbed ipv6 subnetting you can read [this tutorial](https://www.iot-lab.info/tu
 
 ```
 # Book 10 M3 nodes on the Grenoble site for 1 hour 
-$ ./exp_iotlab.py --duration 60 --nodes 10,archi=m3:at86rf231+site=grenoble
+$ ./exp_demo_iotlab.py --duration 60 --nodes 10,archi=m3:at86rf231+site=grenoble
 # Book 10 M3 nodes (m3-1 -> m3-10) on the Grenoble site for 1 hour 
-$ ./exp_iotlab.py --duration 60 --nodes grenoble,m3,1-10
+$ ./exp_demo_iotlab.py --duration 60 --nodes grenoble,m3,1-10
 # Book 10 M3 nodes on the Grenoble site for 1 hour and specify an IPv6 subnet
-$ ./exp_iotlab.py --duration 60 --nodes 10,archi=m3:at86rf231+site=grenoble --ipv6prefix 2001:660:5307:3103
+$ ./exp_demo_iotlab.py --duration 60 --nodes 10,archi=m3:at86rf231+site=grenoble --ipv6prefix 2001:660:5307:3103
 ```
     
 The script returns the border router public ipv6 address and you can test the connectivity. You also can visualize
@@ -111,7 +114,7 @@ $ vi /var/www/freeboard/index.html
 <script type="text/javascript">
     head.js(
             ...
-            "js/freeboard/plugins/plugin_node.js",
+            "plugins/thirdparty/plugin_node.js",
 ```
 
 Open dashboard in your browser
