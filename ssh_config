@@ -1,0 +1,8 @@
+Host devgrenoble
+  User saintmar
+  HostName  devgrenoble.iot-lab.info
+
+Host grenoble
+  User saintmar
+  HostName  grenoble.iot-lab.info
+
