@@ -1,10 +1,4 @@
-Host devgrenoble
+Host <iotlab_site_name>
   User <iotlab_login>
-  HostName  devgrenoble.iot-lab.info
+  HostName  <iotlab_site_name>.iot-lab.info
   IdentityFile ~/.ssh/id_iotlab_rsa 
-
-Host grenoble
-  User <iotlab_login>
-  HostName  grenoble.iot-lab.info
-  IdentityFile ~/.ssh/id_iotlab_rsa
-
