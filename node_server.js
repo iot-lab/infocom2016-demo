@@ -1,8 +1,9 @@
 /*
  * Configurations and helpers
  */
-//var coAPPath = ["light", "serial", "acc"];
-var coAPPath = ["light", "serial"];
+var coAPPath = ["light", "serial", "acc"];
+//var coAPPath = ["light", "serial"];
+//var coAPPath = ["serial"];
 var serverPort = 8080;
 
 /*
@@ -63,16 +64,17 @@ CoAPClient.prototype.get = function () {
     req = coap.request(coapUrl);
     req.on('response', function(res) {
            res.on('data', function (chunk) {
-               var data = chunk.toString().split(' ');
+               var data = JSON.parse(chunk.toString());
                var json = {
-                   value: data[1],
+                   value: data.value,
                    time_stamp: new Date().getTime()
                }
                // socket io : namespace = node uid / eventName = path
-               var nameSpace = (self._hostname.split('::'))[1];
+               //var nameSpace = (self._hostname.split('::'))[1];
+               var nameSpace = data.node;
                var eventName = self._path;
                io.of('/'+nameSpace).emit(eventName, JSON.stringify(json));
-               console.log("New event propagated : Namespace ='%s' EventName = '%s'", nameSpace, eventName);
+               console.log("New event : Hostname=%s Namespace=%s EventName=%s Value=%s", this._hostname, nameSpace, eventName, data.value);
            });
     });
     req.end();
