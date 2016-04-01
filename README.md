@@ -36,8 +36,8 @@ We use [Fabric](http://www.fabfile.org/) python library for SSH application depl
    ```
    # Generate a ssh key pair
    $ ssh-keygen -f ~/.ssh/id_iotlab_rsa
-   # Edit a ssh config file
-   $ cat ~/.ssh/config
+   # Edit ssh config file
+   $ vi ssh_config
    Host <iotlab_site_name>
         HostName  <iotlab_site_name>.iot-lab.info
         User <iotlab_login>
@@ -46,7 +46,7 @@ We use [Fabric](http://www.fabfile.org/) python library for SSH application depl
     Upload your public ssh key (~/.ssh/id_iotlab_rsa.pub) on the IoT-LAB website        
     ```
     # Test ssh connexion
-    ssh <iotlab_site_name>
+    ssh -F ssh_config <iotlab_site_name>
     ```
 
 ### Launch IoT-LAB experiment
