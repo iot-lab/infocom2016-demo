@@ -26,6 +26,7 @@ PARSER = argparse.ArgumentParser()
 iotlabcli.parser.common.add_auth_arguments(PARSER)
 PARSER.add_argument('--name', default=None)
 PARSER.add_argument('--duration', default=720, type=int)
+#PARSER.add_argument('--ipv6prefix', default='2001:660:5307:31C0')
 PARSER.add_argument('--ipv6prefix', default='2001:660:5307:3100')
 PARSER.add_argument('--nodes', action='append',
                                dest='nodes_list', required=True,
@@ -33,8 +34,8 @@ PARSER.add_argument('--nodes', action='append',
                                help="experiment nodes list")
 
 
-#FW_DIR = 'firmwares/contiki3/'
-FW_DIR = 'firmwares/contiki27/'
+FW_DIR = 'firmwares/contiki3/'
+#FW_DIR = 'firmwares/contiki27/'
 FW_DICT = {
     'border_router': os.path.join(FW_DIR, 'border-router.iotlab-m3'),
     'coap_server': os.path.join(FW_DIR, 'er-coap-server.iotlab-m3'),
@@ -98,8 +99,8 @@ def main():
     opts = PARSER.parse_args()
     user, passwd = get_user_credentials(opts.username, opts.password)
     # Fabric configuration with env environment
-    # use ~/.ssh/config file
     env.use_ssh_config = True
+    env.ssh_config_path = './ssh_config'
     # use IoT-LAB login for ssh connexion
     env.user = user
     api = iotlabcli.Api(user, passwd)
