@@ -1,8 +1,10 @@
 Host devgrenoble
-  User saintmar
+  User <iotlab_login>
   HostName  devgrenoble.iot-lab.info
+  IdentityFile ~/.ssh/id_iotlab_rsa 
 
 Host grenoble
-  User saintmar
+  User <iotlab_login>
   HostName  grenoble.iot-lab.info
+  IdentityFile ~/.ssh/id_iotlab_rsa
 
