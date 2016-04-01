@@ -74,7 +74,7 @@ CoAPClient.prototype.get = function () {
                var nameSpace = data.node;
                var eventName = self._path;
                io.of('/'+nameSpace).emit(eventName, JSON.stringify(json));
-               console.log("New event : Hostname=%s Namespace=%s EventName=%s Value=%s", this._hostname, nameSpace, eventName, data.value);
+               console.log("New event : Hostname=%s Namespace=%s EventName=%s Value=%s", self._hostname, nameSpace, eventName, data.value);
            });
     });
     req.end();
