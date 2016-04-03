@@ -15,6 +15,8 @@ We use [Fabric](http://www.fabfile.org/) python library for SSH application depl
     
 * Install node.js and dependencies
     ```
+    $ add-apt-repository ppa:chris-lea/node.js
+    $ apt-get update
     $ apt-get install nodejs npm
     $ npm install socket.io coap
     ```
