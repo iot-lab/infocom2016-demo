@@ -21,11 +21,32 @@ We use [Fabric](http://www.fabfile.org/) python library for SSH application depl
     $ npm install socket.io coap
     ```
 
-* Install lighttpd and [freeboard.io](https://freeboard.io/) dashboard
+* Install nginx and websocket support[freeboard.io](https://freeboard.io/) dashboard
    ```
-   $ apt-get install lighttpd
-   $ cd /var/www
-   $ git clone https://github.com/Freeboard/freeboard.git
+   $ apt-get install nginx
+   $ cat /etc/nginx/sites-available/default
+   server {
+    listen 80;
+
+    # host name to respond to
+    server_name localhost;
+
+    location / {
+        # switch off logging
+        access_log off;
+
+        # redirect all HTTP traffic to localhost:8080
+        proxy_pass http://localhost:8080;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+        # WebSocket support (nginx 1.4)
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+   }
    ```
 
 * Configure IoT-LAB authentication
