@@ -1,4 +1,4 @@
 Host <iotlab_site_name>
-    User <iotlab_login>
     HostName  <iotlab_site_name>.iot-lab.info
+    User <iotlab_login>
     IdentityFile ~/.ssh/id_iotlab_rsa
