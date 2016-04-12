@@ -7,7 +7,6 @@ INFOCOM2016 ipv6 demonstration description ...
 * Install IoT-LAB tools :
 
 We use [Fabric](http://www.fabfile.org/) python library for SSH application deployment
-
     ```
     $ apt-get install python-pip git python-dev python-ecdsa fabric
     $ pip install -e git+https://github.com/iot-lab/cli-tools.git#egg=iotlabcli[secure]
@@ -15,15 +14,38 @@ We use [Fabric](http://www.fabfile.org/) python library for SSH application depl
     
 * Install node.js and dependencies
     ```
+    $ add-apt-repository ppa:chris-lea/node.js
+    $ apt-get update
     $ apt-get install nodejs npm
     $ npm install socket.io coap
     ```
 
-* Install lighttpd and [freeboard.io](https://freeboard.io/) dashboard
+* Install nginx and websocket support
    ```
-   $ apt-get install lighttpd
-   $ cd /var/www
-   $ git clone https://github.com/Freeboard/freeboard.git
+   $ apt-get install nginx
+   $ cat /etc/nginx/sites-available/default
+   server {
+    listen 80;
+
+    # host name to respond to
+    server_name localhost;
+
+    location / {
+        # switch off logging
+        access_log off;
+
+        # redirect all HTTP traffic to localhost:8080
+        proxy_pass http://localhost:8080;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+        # WebSocket support (nginx 1.4)
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+   }
    ```
 
 * Configure IoT-LAB authentication
@@ -93,15 +115,23 @@ $ node node_server.js <br_ipv6_address>
 
 It separates CoAP clients communication channel with Websockets namespaces :
 ```
-# namespace = m3 node uid = end of the CoAP server ipv6 address
-# eventname = CoAP resource like light or serial
+# namespace = m3 node name = m3-<id>
+# eventname = CoAP resource like light, serial and acc 
 io.of(/<namespace>).emit(<eventname>, value)
 ```
 
 ### Configure IoT dashboard (Freeboard.io)
 
+Install [freeboard.io](https://freeboard.io/) dashboard on your computer
+
+```
+cd ~
+git clone https://github.com/Freeboard/freeboard.git
+```
+
 Copy datasource plugin to connect freeboard.io dashboard to real-time node.js server. It subscribe to real-time event using
 WebSockets (Sockets.io)
+
 
 ```
 $ cp freeboard/plugin_node.js /var/www/freeboard/plugins/thirdparty/
@@ -119,17 +149,14 @@ $ vi /var/www/freeboard/index.html
 
 Open dashboard in your browser
 
-```
-http://<your_cloud_instance>/freeboard
-```
 
 You can add a new datasource :
 
 * Type : Node.js (Socket.io)
 * Name : Choose a name 
-* Server URL : http://localhost:8080 (Node.js server address)
-* NameSpace : m3 node uid
-* Event : light|serial
+* Server URL : http://<node_server_ip> (Node.js server address)
+* NameSpace : m3 node name
+* Event : light|serial|acc
 
 Add a widget to visualize the datasource values.
 
