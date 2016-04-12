@@ -1,0 +1,455 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"title": "M3-9 ACC",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 1
+			},
+			"col": {
+				"3": 3,
+				"4": 4
+			},
+			"col_width": "1",
+			"widgets": [
+				{
+					"type": "indicator_robot_plugin",
+					"settings": {
+						"acc_peak": "datasources[\"m3-9 acc\"][\"value\"]"
+					}
+				}
+			]
+		},
+		{
+			"title": "M3-7 ACC",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 1
+			},
+			"col": {
+				"3": 3,
+				"4": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator_robot_plugin",
+					"settings": {
+						"acc_peak": "datasources[\"m3-7 acc\"][\"value\"]"
+					}
+				}
+			]
+		},
+		{
+			"title": "M3-3 ACC",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 1
+			},
+			"col": {
+				"3": 2,
+				"4": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator_robot_plugin",
+					"settings": {
+						"acc_peak": "datasources[\"m3-3 acc\"][\"value\"]"
+					}
+				}
+			]
+		},
+		{
+			"title": "M3-2 ACC",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 1
+			},
+			"col": {
+				"3": 1,
+				"4": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator_robot_plugin",
+					"settings": {
+						"acc_peak": "datasources[\"m3-2 acc\"][\"value\"]"
+					}
+				}
+			]
+		},
+		{
+			"title": "M3-17 ACC",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 5
+			},
+			"col": {
+				"3": 3,
+				"4": 4
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator_robot_plugin",
+					"settings": {
+						"acc_peak": "datasources[\"m3-17 acc\"][\"value\"]"
+					}
+				}
+			]
+		},
+		{
+			"title": "M3-23 SERIAL",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 9
+			},
+			"col": {
+				"3": 3,
+				"4": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "",
+						"size": "regular",
+						"value": "datasources[\"m3-23 serial\"][\"value\"]",
+						"animate": true
+					}
+				}
+			]
+		},
+		{
+			"title": "GRENOBLE WEBCAM",
+			"width": 1,
+			"row": {
+				"3": 1,
+				"4": 9
+			},
+			"col": {
+				"3": -9,
+				"4": 1
+			},
+			"col_width": "2",
+			"widgets": [
+				{
+					"type": "html",
+					"settings": {
+						"html": "<iframe\nsrc=\"http://webcam-grenoble.iot-lab.info/mjpg/video.mjpg\"\nheight=\"620\" width=\"620\">\n</iframe> ",
+						"height": 8
+					}
+				}
+			]
+		},
+		{
+			"title": "M3-2 LIGHT",
+			"width": 1,
+			"row": {
+				"4": 9
+			},
+			"col": {
+				"4": 4
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"size": "regular",
+						"value": "datasources[\"m3-2 light\"][\"value\"]",
+						"animate": true,
+						"units": "LUX"
+					}
+				}
+			]
+		},
+		{
+			"title": "M3-4 LIGHT",
+			"width": 1,
+			"row": {
+				"4": 13
+			},
+			"col": {
+				"4": 4
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"size": "regular",
+						"value": "datasources[\"m3-4 light\"][\"value\"]",
+						"animate": true,
+						"units": "LUX"
+					}
+				}
+			]
+		},
+		{
+			"title": "M3-11 ACC",
+			"width": 1,
+			"row": {
+				"4": 5
+			},
+			"col": {
+				"4": 1
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator_robot_plugin",
+					"settings": {
+						"acc_peak": "datasources[\"m3-11 acc\"][\"value\"]"
+					}
+				}
+			]
+		},
+		{
+			"title": "M3-13 ACC",
+			"width": 1,
+			"row": {
+				"4": 5
+			},
+			"col": {
+				"4": 2
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator_robot_plugin",
+					"settings": {
+						"acc_peak": "datasources[\"m3-13 acc\"][\"value\"]"
+					}
+				}
+			]
+		},
+		{
+			"title": "M3-15 ACC",
+			"width": 1,
+			"row": {
+				"4": 5
+			},
+			"col": {
+				"4": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "indicator_robot_plugin",
+					"settings": {
+						"acc_peak": "datasources[\"m3-15 acc\"][\"value\"]"
+					}
+				}
+			]
+		},
+		{
+			"title": "M3-16 MAG",
+			"width": 1,
+			"row": {
+				"4": 17
+			},
+			"col": {
+				"4": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "sparkline",
+					"settings": {
+						"value": [
+							"datasources[\"m3-16 mag\"][\"value\"]"
+						],
+						"include_legend": true,
+						"legend": "MAG_OFFSET"
+					}
+				}
+			]
+		},
+		{
+			"title": "M3-19 MAG",
+			"width": 1,
+			"row": {
+				"4": 17
+			},
+			"col": {
+				"4": 4
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "sparkline",
+					"settings": {
+						"value": [
+							"datasources[\"m3-19 mag\"][\"value\"]"
+						],
+						"include_legend": true,
+						"legend": "MAG_OFFSET"
+					}
+				}
+			]
+		},
+		{
+			"title": "M3-25 SERIAL",
+			"width": 1,
+			"row": {
+				"4": 13
+			},
+			"col": {
+				"4": 3
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"size": "regular",
+						"value": "datasources[\"m3-25 serial\"][\"value\"]",
+						"animate": true
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "m3-23 serial",
+			"type": "node_js_plugin",
+			"settings": {
+				"url": "http://132.227.122.134",
+				"nameSpace": "m3-23",
+				"eventName": "serial"
+			}
+		},
+		{
+			"name": "m3-2 acc",
+			"type": "node_js_plugin",
+			"settings": {
+				"url": "http://132.227.122.134",
+				"nameSpace": "m3-2",
+				"eventName": "acc"
+			}
+		},
+		{
+			"name": "m3-3 acc",
+			"type": "node_js_plugin",
+			"settings": {
+				"url": "http://132.227.122.134",
+				"nameSpace": "m3-3",
+				"eventName": "acc"
+			}
+		},
+		{
+			"name": "m3-7 acc",
+			"type": "node_js_plugin",
+			"settings": {
+				"url": "http://132.227.122.134",
+				"nameSpace": "m3-7",
+				"eventName": "acc"
+			}
+		},
+		{
+			"name": "m3-9 acc",
+			"type": "node_js_plugin",
+			"settings": {
+				"url": "http://132.227.122.134",
+				"nameSpace": "m3-9",
+				"eventName": "acc"
+			}
+		},
+		{
+			"name": "m3-11 acc",
+			"type": "node_js_plugin",
+			"settings": {
+				"url": "http://132.227.122.134",
+				"nameSpace": "m3-11",
+				"eventName": "acc"
+			}
+		},
+		{
+			"name": "m3-13 acc",
+			"type": "node_js_plugin",
+			"settings": {
+				"url": "http://132.227.122.134",
+				"nameSpace": "m3-13",
+				"eventName": "acc"
+			}
+		},
+		{
+			"name": "m3-15 acc",
+			"type": "node_js_plugin",
+			"settings": {
+				"url": "http://132.227.122.134",
+				"nameSpace": "m3-15",
+				"eventName": "acc"
+			}
+		},
+		{
+			"name": "m3-17 acc",
+			"type": "node_js_plugin",
+			"settings": {
+				"url": "http://132.227.122.134",
+				"nameSpace": "m3-17",
+				"eventName": "acc"
+			}
+		},
+		{
+			"name": "m3-2 light",
+			"type": "node_js_plugin",
+			"settings": {
+				"url": "http://132.227.122.134",
+				"nameSpace": "m3-2",
+				"eventName": "light"
+			}
+		},
+		{
+			"name": "m3-16 mag",
+			"type": "node_js_plugin",
+			"settings": {
+				"url": "http://132.227.122.134",
+				"nameSpace": "m3-16",
+				"eventName": "mag"
+			}
+		},
+		{
+			"name": "m3-19 mag",
+			"type": "node_js_plugin",
+			"settings": {
+				"url": "http://132.227.122.134",
+				"nameSpace": "m3-19",
+				"eventName": "mag"
+			}
+		},
+		{
+			"name": "m3-4 light",
+			"type": "node_js_plugin",
+			"settings": {
+				"url": "http://132.227.122.134",
+				"nameSpace": "m3-4",
+				"eventName": "light"
+			}
+		},
+		{
+			"name": "m3-25 serial",
+			"type": "node_js_plugin",
+			"settings": {
+				"url": "http://132.227.122.134",
+				"nameSpace": "m3-25",
+				"eventName": "serial"
+			}
+		}
+	],
+	"columns": 4
+}
