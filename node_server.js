@@ -1,9 +1,7 @@
 /*
  * Configurations and helpers
  */
-var coAPPath = ["light", "serial", "acc"];
-//var coAPPath = ["light", "serial"];
-//var coAPPath = ["serial"];
+var coAPPath = ["light", "serial", "acc", "mag"];
 var serverPort = 8080;
 
 /*
@@ -21,6 +19,7 @@ if (process.argv.length <= 2) {
  
 var brHostName = process.argv[2];
 var networkSubnet = brHostName.split('::')[0]
+
 
 /*
  * Collect data
@@ -64,17 +63,14 @@ CoAPClient.prototype.get = function () {
     req = coap.request(coapUrl);
     req.on('response', function(res) {
            res.on('data', function (chunk) {
+               var date = new Date();
                var data = JSON.parse(chunk.toString());
-               var json = {
-                   value: data.value,
-                   time_stamp: new Date().getTime()
-               }
-               // socket io : namespace = node uid / eventName = path
-               //var nameSpace = (self._hostname.split('::'))[1];
+               data.time_stamp = date.getTime();
+               // socket io : namespace = node name (eg m3-<id>) / eventName = path
                var nameSpace = data.node;
                var eventName = self._path;
-               io.of('/'+nameSpace).emit(eventName, JSON.stringify(json));
-               console.log("New event : Hostname=%s Namespace=%s EventName=%s Value=%s", self._hostname, nameSpace, eventName, data.value);
+               io.of('/'+nameSpace).emit(eventName, JSON.stringify(data));
+               console.log("New event : Hostname=%s Namespace=%s EventName=%s Value=%s Time=%s", self._hostname, nameSpace, eventName, data.value, date.toLocaleTimeString());
            });
     });
     req.end();
