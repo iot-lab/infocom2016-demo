@@ -1,6 +1,6 @@
 # infocom2016-demo
 
-INFOCOM2016 ipv6 demonstration description ...
+INFOCOM2016 ipv6 end to end demonstration.
 
 ### Requirement
 
@@ -19,35 +19,7 @@ We use [Fabric](http://www.fabfile.org/) python library for SSH application depl
     $ apt-get install nodejs npm
     $ npm install socket.io coap
     ```
-
-* Install nginx and websocket support
-   ```
-   $ apt-get install nginx
-   $ cat /etc/nginx/sites-available/default
-   server {
-    listen 80;
-
-    # host name to respond to
-    server_name localhost;
-
-    location / {
-        # switch off logging
-        access_log off;
-
-        # redirect all HTTP traffic to localhost:8080
-        proxy_pass http://localhost:8080;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header Host $host;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-
-        # WebSocket support (nginx 1.4)
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-    }
-   }
-   ```
-
+    
 * Configure IoT-LAB authentication
    ```  
    $ auth-cli -u <iotlab_login>
@@ -65,7 +37,7 @@ We use [Fabric](http://www.fabfile.org/) python library for SSH application depl
         User <iotlab_login>
         IdentityFile ~/.ssh/id_iotlab_rsa
     ```
-    Upload your public ssh key (~/.ssh/id_iotlab_rsa.pub) on the IoT-LAB website        
+    Upload your public ssh key (~/.ssh/id_iotlab_rsa.pub) on the [IoT-LAB website](https://www.iot-lab.info/testbed/user_profile.php)       
     ```
     # Test ssh connexion
     ssh -F ssh_config <iotlab_site_name>
@@ -125,30 +97,27 @@ io.of(/<namespace>).emit(<eventname>, value)
 Install [freeboard.io](https://freeboard.io/) dashboard on your computer
 
 ```
-cd ~
 git clone https://github.com/Freeboard/freeboard.git
 ```
 
 Copy datasource plugin to connect freeboard.io dashboard to real-time node.js server. It subscribe to real-time event using
 WebSockets (Sockets.io)
 
-
 ```
-$ cp freeboard/plugin_node.js /var/www/freeboard/plugins/thirdparty/
+$ cp plugin_iotlab.js freeboard/plugins/thirdparty/
 ```
 
 Edit your freeboard.io main HTML file and add the plugin to the header
 
 ```
-$ vi /var/www/freeboard/index.html
+$ vi freeboard/index.html
 <script type="text/javascript">
     head.js(
             ...
-            "plugins/thirdparty/plugin_node.js",
+            "plugins/thirdparty/plugin_iotlab.js",
 ```
 
 Open dashboard in your browser
-
 
 You can add a new datasource :
 
@@ -158,9 +127,9 @@ You can add a new datasource :
 * NameSpace : m3 node name
 * Event : light|serial|acc
 
-Add a widget to visualize the datasource values.
+Add widgets to visualize the datasource values. You cand load infocom2016 demonstration dashboard example with the JSON file dashboard_iotlab.json.
 
-TODO complete with widget screenshot
+
 
 
 
